@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Operação Ganimedes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="introScreen" class="overlay">
+        <div class="overlay-card">
+            <div class="space-art">🚀 🪐</div>
+            <h1>Operação Ganimedes</h1>
+            <p>Bem-vindo, Comandante!</p>
+            <p>Sua missão é guiar uma nave de suprimentos até a órbita de Ganimedes, a maior lua de Júpiter.</p>
+            <p>Para o lançamento ser um sucesso, resolva <strong>5 desafios para cada uma das 5 etapas</strong>:</p>
+            
+            <ul class="game-rules">
+                <li>🔋 <strong>Etapa 1:</strong> Sistema de Combustível</li>
+                <li>⚙️ <strong>Etapa 2:</strong> Motores de Dobra</li>
+                <li>🗺️ <strong>Etapa 3:</strong> Trajetória Orbital</li>
+                <li>🔒 <strong>Etapa 4:</strong> Criptografia de Códigos</li>
+                <li>🔥 <strong>Etapa 5:</strong> Ignição e Lançamento Final!</li>
+            </ul>
+
+            <button onclick="startGame()">Iniciar Missão 🛰️</button>
+        </div>
+    </div>
+
+    <div id="victoryScreen" class="overlay hidden">
+        <div class="overlay-card">
+            <div class="space-art" style="font-size: 50px;">🛠️✨</div>
+            <h1 style="color: #10b981;">Sistema Atualizado!</h1>
+            <h2 id="victoryStageTitle" style="font-size: 40px; color: #9ca3af; margin-bottom: 15px;">Etapa Concluída</h2>
+            
+            <p id="victoryRewardText">Você conquistou uma nova parte do foguete!</p>
+            
+            <div class="reward-display">
+                ✨ COMPONENTE INSTALADO COM SUCESSO ✨
+            </div>
+
+            <button onclick="closeVictoryScreen()">Avançar Diretriz ➡️</button>
+        </div>
+    </div>
+
+    <div id="gameContainer" class="container hidden">
+
+        <h1>🚀 Operação Ganimedes</h1>
+
+        <div class="card">
+            <div class="stats">
+                <div class="stat">
+                    Pontuação
+                    <h2 id="score">0</h2>
+                </div>
+                <div class="stat">
+                    Etapa
+                    <h2 id="phase">0/5</h2>
+                </div>
+                <div class="stat">
+                    Questão
+                    <h2 id="question">1/5</h2>
+                </div>
+                <div class="stat">
+                    Dicas
+                    <h2 id="tips">3</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="gameArea">
+
+            <div class="questionArea">
+                <div class="card">
+                    <h2 id="phaseTitle">Carregando sistemas...</h2>
+                    <p id="questionText">
+                        Computando dados da viagem espacial...
+                    </p>
+
+                    <input type="number" id="answerInput" placeholder="Digite sua resposta numérica">
+
+                    <div class="button-group">
+                        <button onclick="checkAnswer()">Verificar</button>
+                        <button onclick="showHint()">Dica</button>
+                    </div>
+
+                    <p id="feedback"></p>
+                </div>
+            </div>
+
+            <div class="rocketArea">
+                <div class="rocketBox">
+                    <div id="starfield" class="hidden">
+                        <div class="star" style="top:10%; left:20%; animation-delay: 0s;"></div>
+                        <div class="star" style="top:30%; left:75%; animation-delay: 0.5s;"></div>
+                        <div class="star" style="top:55%; left:15%; animation-delay: 1.2s;"></div>
+                        <div class="star" style="top:70%; left:80%; animation-delay: 0.8s;"></div>
+                        <div class="star" style="top:85%; left:40%; animation-delay: 1.5s;"></div>
+                    </div>
+
+                    <svg viewBox="0 0 200 350" id="spaceSvg">
+                        <!-- PLATAFORMA / TORRE DE LANÇAMENTO INDUSTRIAL -->
+                        <g id="platform">
+                            <!-- Base de Concreto Reforçada no Chão -->
+                            <rect x="20" y="250" width="160" height="15" fill="#1e293b" rx="6" />
+                            <rect x="15" y="260" width="170" height="10" fill="#0f172a" rx="2" />
+                            
+                            <!-- Vigas Principais da Torre Lateral (Vazadas) -->
+                            <line x1="140" y1="60" x2="140" y2="250" stroke="#475569" stroke-width="3" />
+                            <line x1="160" y1="60" x2="160" y2="250" stroke="#475569" stroke-width="3" />
+                            
+                            <!-- Treliças Metálicas em "X" (Visual Aeroespacial) -->
+                            <g stroke="#334155" stroke-width="2">
+                                <line x1="140" y1="60" x2="160" y2="90" />
+                                <line x1="160" y1="60" x2="140" y2="90" />
+                                
+                                <line x1="140" y1="90" x2="160" y2="120" />
+                                <line x1="160" y1="90" x2="140" y2="120" />
+                                
+                                <line x1="140" y1="120" x2="160" y2="150" />
+                                <line x1="160" y1="120" x2="140" y2="150" />
+                                
+                                <line x1="140" y1="150" x2="160" y2="180" />
+                                <line x1="160" y1="150" x2="140" y2="180" />
+                                
+                                <line x1="140" y1="180" x2="160" y2="210" />
+                                <line x1="160" y1="180" x2="140" y2="210" />
+                                
+                                <line x1="140" y1="210" x2="160" y2="250" />
+                                <line x1="160" y1="210" x2="140" y2="250" />
+                            </g>
+
+                            <!-- Luzes de Alerta de Lançamento (Piscantes no topo) -->
+                            <circle cx="140" cy="55" r="3" fill="#ef4444" class="tower-light" />
+                            <circle cx="160" cy="55" r="3" fill="#ef4444" class="tower-light" />
+
+                            <!-- Braço de Conexão Articulado Reajustado -->
+                            <rect id="platformArm" x="115" y="115" width="25" height="6" fill="#38bdf8" rx="2" />
+                        </g>
+
+                        <!-- GRUPO DO FOGUETE (DESIGN ULTRA-SLIM E PROPORCIONAL) -->
+                        <!-- GRUPO DO FOGUETE (CORREÇÃO DE SOMBRA E ALINHAMENTO) -->
+                        <g id="rocketGroup">
+                            <!-- PROPULSORES LATERAIS (Etapa 1) -->
+                            <polygon id="finL" class="hidden" points="78,190 48,250 78,245" fill="#dc2626"/>
+                            <polygon id="finR" class="hidden" points="122,190 152,250 122,245" fill="#dc2626"/>
+                            
+                            <!-- BASE ESCAPAMENTO DO MOTOR (Etapa 1) -->
+                            <rect id="base" class="hidden" x="89" y="235" width="22" height="15" fill="#334155" rx="2"/>
+                            
+                            <!-- CORPO PRINCIPAL (Etapa 2) com Sombra Perfeita -->
+                            <g id="body" class="hidden">
+                                <!-- Chapa de Metal Principal -->
+                                <rect x="78" y="85" width="44" height="155" rx="14" fill="#cbd5e1"/>
+                                
+                                <!-- SOMBRA LATERAL 3D CORRIGIDA: Acompanha o arredondamento do foguete sem vazar pontas -->
+                                <rect x="100" y="85" width="22" height="155" rx="14" fill="#94a3b8" opacity="0.4" style="mix-blend-mode: multiply;"/>
+                                <!-- Bloco corretor interno para manter o centro da sombra reto e cobrir apenas a metade direita -->
+                                <rect x="100" y="85" width="10" height="155" fill="#94a3b8" opacity="0.4" style="mix-blend-mode: multiply;"/>
+
+                                <!-- Linhas de Junção dos Painéis Térmicos -->
+                                <line x1="78" y1="135" x2="122" y2="135" stroke="#94a3b8" stroke-width="1.5" opacity="0.6"/>
+                                <line x1="78" y1="185" x2="122" y2="185" stroke="#94a3b8" stroke-width="1.5" opacity="0.6"/>
+                                
+                                <!-- TEXTO VERTICAL -->
+                                <g fill="#1e293b" opacity="0.35" font-family="'Courier New', Courier, monospace" font-weight="900" font-size="10" text-anchor="middle">
+                                    <text x="88" y="112">A</text>
+                                    <text x="88" y="124">E</text>
+                                    <text x="88" y="136">R</text>
+                                    <text x="88" y="148">O</text>
+                                    
+                                    <text x="88" y="167" font-size="7" font-weight="bold">B</text>
+                                    <text x="88" y="176" font-size="7" font-weight="bold">1</text>
+                                    <text x="88" y="185" font-size="7" font-weight="bold">2</text>
+                                </g>
+                            </g>
+                            
+                            <!-- COCKPIT / JANELA (Etapa 3) -->
+                            <g id="window" class="hidden">
+                                <circle cx="100" cy="120" r="11" fill="#475569" />
+                                <circle cx="100" cy="120" r="9" fill="#0284c7" />
+                                <path d="M 94,115 Q 100,111 106,115 Q 100,117 94,115 Z" fill="#e0f2fe" opacity="0.6"/>
+                            </g>
+                            
+                            <!-- CONE DE COMANDO / NARIZ (Etapa 4) -->
+                            <g id="nose" class="hidden">
+                                <polygon points="78,96 122,96 100,35" fill="#dc2626"/>
+                                <line x1="100" y1="35" x2="100" y2="23" stroke="#64748b" stroke-width="2"/>
+                                <circle cx="100" cy="21" r="2" fill="#ef4444"/>
+                            </g>
+                            
+                            <!-- FOGO MULTICAMADAS (Etapa 5) -->
+                            <g id="fire" class="hidden">
+                                <polygon points="89,248 111,248 100,315" fill="#f97316"/> 
+                                <polygon points="93,248 107,248 100,290" fill="#facc15"/> 
+                                <polygon points="96,248 104,248 100,270" fill="#ffffff"/> 
+                            </g>
+                        </g>
+                            
+                            <!-- COCKPIT / JANELA (Etapa 3) com Detalhe de Reflexo e Aro Metálico -->
+                            <g id="window" class="hidden">
+                                <circle cx="105" cy="120" r="15" fill="#475569" /> <!-- Aro Externo -->
+                                <circle cx="105" cy="120" r="12" fill="#0284c7" /> <!-- Vidro -->
+                                <!-- Reflexo de Luz no Vidro (Efeito Realista) -->
+                                <path d="M 97,114 Q 105,110 113,114 Q 105,116 97,114 Z" fill="#e0f2fe" opacity="0.6"/>
+                            </g>
+                            
+                            <!-- CONE DE COMANDO / NARIZ (Etapa 4) com Listra de Alerta -->
+                            <g id="nose" class="hidden">
+                                <polygon points="70,95 130,95 100,35" fill="#dc2626"/>
+                                <!-- Ponta de Antena de Telemetria -->
+                                <line x1="100" y1="35" x2="100" y2="25" stroke="#64748b" stroke-width="2"/>
+                                <circle cx="100" cy="23" r="2" fill="#ef4444"/>
+                            </g>
+                            
+                            <!-- FOGO MULTICAMADAS DINÂMICO (Etapa 5) -->
+                            <g id="fire" class="hidden">
+                                <polygon points="85,248 115,248 100,315" fill="#f97316"/> 
+                                <polygon points="90,248 110,248 100,290" fill="#facc15"/> 
+                                <polygon points="95,248 105,248 100,270" fill="#ffffff"/> 
+                            </g>
+                        </g>
+
+                        <g id="smoke" class="hidden">
+                            <circle cx="75" cy="255" r="15" fill="#64748b" opacity="0.8" />
+                            <circle cx="100" cy="255" r="22" fill="#94a3b8" opacity="0.9" />
+                            <circle cx="125" cy="255" r="15" fill="#64748b" opacity="0.8" />
+                            <circle cx="55" cy="260" r="10" fill="#475569" opacity="0.7" />
+                            <circle cx="145" cy="260" r="10" fill="#475569" opacity="0.7" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="progress">
+                <div class="progressBar" id="bar"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

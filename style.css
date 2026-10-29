@@ -1,0 +1,564 @@
+/* ==========================================================================
+   RESET E CONFIGURAÇÕES GERAIS (Tema Dark Sci-Fi)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #08111f, #030712);
+    color: #f3f4f6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+}
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 15px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 38px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Força sumir fisicamente elementos ocultos */
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   PAINÉIS E CARDS DO JOGO
+   ========================================================================== */
+.card {
+    background: #111827;
+    padding: 24px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #1f2937;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+/* Status superiores */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.stat {
+    background: #1f2937;
+    padding: 6px 45px;
+    border-radius: 10px;
+    min-width: 120px;
+    text-align: center;
+    color: #ffd417;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #2d3748;
+    flex: 1;
+}
+
+.stat h2 {
+    color: #38bdf8;
+    font-size: 26px;
+    margin-top: 1px;
+}
+
+/* Barra de Progresso */
+.progress {
+    height: 30px;
+    background: #1f2937;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #2d3748;
+    width: 100%;
+}
+
+.progressBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    transition: width 0.6s ease-in-out;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+/* ==========================================================================
+   LAYOUT DO JOGO EM COLUNAS (DIRETRIZ NOTEBOOK)
+   ========================================================================== */
+.gameArea {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start; 
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.questionArea {
+    flex: 3; 
+    display: flex;
+}
+
+/* ==========================================================================
+   ALTURA E PROPORÇÃO DA ÁREA DO FOGUETE (Formato Quadrado)
+   ========================================================================== */
+.rocketArea {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111827;
+    border-radius: 15px;
+    border: 1px solid #1f2937;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    
+    /* MODIFICAÇÃO PARA FORMATO QUADRADO: */
+    height: 480px;            /* Mantém a altura imponente */
+    max-width: 480px;         /* Limita a largura para travar em 1:1 (Quadrado) */
+    width: 100%;              /* Garante flexibilidade em telas menores */
+    
+    position: relative;
+    overflow: hidden;
+    transition: background 2s ease;
+}
+
+.rocketBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.15));
+    width: 100%;              /* Ocupa a área quadrada interna */
+    height: 100%;
+}
+
+svg {
+    /* Ajustado para preencher melhor o espaço quadrado sem distorcer */
+    width: 100%;
+    max-width: 200px;        
+    height: auto;
+}
+
+svg text {
+    user-select: none;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   ÁREA DE ENTRADA E BOTÕES (DESAFIO)
+   ========================================================================== */
+#phaseTitle {
+    color: #32f50b;
+    font-size: 30px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 5px;
+}
+
+#questionText {
+    font-size: 32px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    color: #e5e7eb;
+    font-weight: 500;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #1f2937;
+    border: 2px solid #374151;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s;
+    margin-bottom: 15px;
+}
+
+input[type="number"]:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] { -moz-appearance: textfield; }
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    background: #10b981;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 2;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover { background: #059669; }
+button:active { transform: scale(0.98); }
+
+button:nth-of-type(2) {
+    background: #4b5563;
+    flex: 1;
+}
+button:nth-of-type(2):hover { background: #374151; }
+
+#feedback {
+    margin-top: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    min-height: 120px; 
+}
+
+/* ==========================================================================
+   TELAS DE SOBREPOSIÇÃO (OVERLAYS / MODAIS CENTRALIZADOS)
+   ========================================================================== */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    z-index: 9999;
+    overflow-y: auto; 
+    padding: 40px 0; 
+}
+
+.overlay-card {
+    background-color: #1e293b;
+    padding: 35px 40px;
+    border-radius: 16px;
+    width: 1450px; 
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 1px solid #334155;
+    margin: auto; 
+}
+
+.space-art {
+    font-size: 54px;
+    margin-bottom: 15px;
+    animation: float 4s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes float {
+    0% { transform: translateY(20px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(20px); }
+}
+
+.overlay-card h1 {
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+}
+
+.overlay-card p {
+    font-size: 30px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    color: #e5e7eb;
+}
+
+.game-rules {
+    width: 100%;
+    text-align: center;
+    background: rgba(33, 55, 31, 0.6);
+    padding: 18px;
+    border-radius: 32px;
+    list-style: none;
+    margin: 15px 0 25px 0;
+    border: 1px solid #374151;
+    box-sizing: border-box;
+}
+
+.game-rules li {
+    margin-bottom: 10px;
+    font-size: 26px;
+    color: #d1d5db;
+}
+
+.reward-display {
+    background: linear-gradient(135deg, #064e3b 0%, #111827 100%);
+    padding: 15px;
+    border-radius: 12px;
+    color: #34d399;
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin: 15px 0 25px 0;
+    border: 1px solid #059669;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.overlay-card button {
+    background: #38bdf8;
+    color: #030712;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.overlay-card button:hover {
+    background: #0ea5e9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(56, 210, 248, 0.6);
+}
+
+
+/* ==========================================================================
+   ANIMAÇÕES REVISADAS: LANÇAMENTO CINEMATOGRÁFICO
+   ========================================================================== */
+
+.launching {
+    background: #020617 !important;
+}
+
+/* 1. ESTADO DE AQUECIMENTO (Motores tremendo, braço 100% travado) */
+.rocketArea.engines-warming #rocketGroup {
+    animation: tremble 0.1s infinite alternate;
+}
+
+/* Aqui matamos o conflito: sem transition no aquecimento para não dar rebote visual */
+.rocketArea.engines-warming #platformArm {
+    transform-origin: 140px 175px !important; /* Ponto de articulação exato do SVG */
+    transform: rotate(0deg) !important;
+}
+
+/* 2. ESTADO DE DECOLAGEM (O foguete sobe e o braço abre) */
+.rocketArea.launching #rocketGroup {
+    animation: tremble 0.05s infinite alternate, rocketUp 4s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes rocketUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-700px); }
+}
+
+/* O braço só ganha a propriedade 'transition' quando entra a classe .launching */
+.rocketArea.launching #platformArm {
+    transform-origin: 140px 175px !important; /* Mantém a mesma origem */
+    transform: rotate(90deg) !important;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important; /* Movimento fluido só aqui */
+}
+
+/* Cenário e fumaça */
+.rocketArea.launching #platform {
+    animation: platformDrop 2.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+.rocketArea.launching #smoke {
+    display: block !important;
+    animation: smokeDrop 1.5s ease-in forwards;
+}
+
+#fire.show {
+    display: block !important;
+    animation: firePulse 0.05s infinite alternate;
+    transform-origin: top center;
+}
+
+/* ESTRELAS CADENTES VERTICAIS NA DECOLAGEM */
+.rocketArea.launching .star {
+    position: absolute;
+    width: 3px;
+    height: 15px; 
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+    border-radius: 50%;
+    animation: starFall 0.8s linear infinite;
+}
+
+/* KEYFRAMES DAS TRANSICÕES DE LANÇAMENTO */
+@keyframes tremble {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(-1px, -1px) rotate(0.5deg); }
+}
+
+@keyframes platformDrop {
+    0% { transform: translateY(0); opacity: 1; }
+    30% { opacity: 1; }
+    100% { transform: translateY(400px); opacity: 0; }
+}
+
+@keyframes smokeDrop {
+    0% { transform: scale(1) translateY(0); filter: blur(2px); opacity: 1; }
+    100% { transform: scale(1.5) translateY(300px); filter: blur(8px); opacity: 0; }
+}
+
+@keyframes starFall {
+    0% { transform: translateY(-350px); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(350px); opacity: 0; }
+}
+
+@keyframes firePulse {
+    0% { transform: scaleY(0.95) scaleX(0.98); filter: brightness(1.1); }
+    100% { transform: scaleY(1.2) scaleX(1.02); filter: brightness(1.4); }
+}
+
+.tower-light {
+    animation: beacon 0.6s infinite alternate;
+}
+
+@keyframes beacon {
+    0% { opacity: 0.2; filter: drop-shadow(0 0 1px #ef4444); }
+    100% { opacity: 1; filter: drop-shadow(0 0 6px #ef4444); }
+}
+
+/* ==========================================================================
+   ANIMAÇÕES DA FASE 2: ESTÁGIO DE CRUZEIRO HORIZONTAL
+   ========================================================================== */
+.rocketArea.cruising .rocketBox {
+    background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+}
+
+.rocketArea.cruising #smoke {
+    display: none !important;
+}
+
+/* Gira o foguete em 90° e reduz para 0.40 para caber perfeitamente no Notebook */
+.rocketArea.cruising #rocketGroup {
+    transform: rotate(90deg) scale(0.40) translate(-10px, -20px) !important;
+    transform-origin: center;
+    animation: spaceFloat 3s ease-in-out infinite alternate !important;
+}
+
+@keyframes spaceFloat {
+    0% { transform: rotate(90deg) scale(0.40) translate(-10px, -28px) !important; }
+    100% { transform: rotate(90deg) scale(0.40) translate(-10px, -12px) !important; }
+}
+
+/* Estrelas correndo da DIREITA para a ESQUERDA (Efeito Esteira) */
+.rocketArea.cruising .star {
+    position: absolute;
+    background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0));
+    height: 2px !important;
+    width: 60px !important;
+    border-radius: 0;
+    animation: starStream 0.6s linear infinite !important;
+}
+
+@keyframes starStream {
+    0% { transform: translate(300px, 0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translate(-100px, 0); opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.8; transform: scale(0.98); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.8; transform: scale(0.98); }
+}
+
+/* Responsivo básico */
+@media (max-width: 900px) {
+    .gameArea {
+        flex-direction: column;
+    }
+    .rocketArea {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   EFEITOS VISUAIS AVANÇADOS DA FASE 2 (CRUZEIRO ESPACIAL)
+   ========================================================================== */
+
+/* 1. PULSAÇÃO DO ESCUDO DEFLETOR (Etapa 6+) */
+.show-shield #spaceShield {
+    display: block !important;
+    animation: shieldPulse 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes shieldPulse {
+    0% { opacity: 0.3; filter: drop-shadow(0 0 3px #00d2ff); }
+    100% { opacity: 0.8; filter: drop-shadow(0 0 12px #00d2ff); }
+}
+
+/* 2. VELOCIDADE DE DOBRA - HIPERESPAÇO (Etapas 9 e 10) */
+.hyper-speed .star {
+    width: 150px !important; /* Estica as estrelas criando feixes de luz */
+    height: 3px !important;
+    background: linear-gradient(90deg, #38bdf8, rgba(255, 255, 255, 0)) !important;
+    animation: starStream 0.2s linear infinite !important; /* Velocidade extrema */
+}
+
+/* 3. ANIMAÇÃO DE ASTEROIDES (Injetados no Erro) */
+.asteroid {
+    position: absolute;
+    width: 26px;
+    height: 24px;
+    background: radial-gradient(circle at 30% 30%, #6b7280, #374151);
+    border-radius: 40% 60% 45% 50% / 40% 45% 60% 50%; /* Rocha irregular */
+    box-shadow: inset -4px -4px 0px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.6);
+    animation: asteroidFly 0.8s linear forwards;
+}
+
+@keyframes asteroidFly {
+    0% { transform: translate(490px, var(--start-y)) rotate(0deg); opacity: 1; }
+    75% { transform: translate(110px, var(--end-y)) rotate(220deg); opacity: 1; }
+    /* Impacto no bico protetor da nave */
+    85% { transform: translate(95px, var(--end-y)) scale(1.3); background: #ef4444; filter: blur(1px); opacity: 0.9; }
+    100% { transform: translate(70px, var(--end-y)) scale(0); opacity: 0; }
+}
+
+/* 4. FLASH DE IMPACTO NA ÁREA DE PERGUNTAS */
+@keyframes damageFlash {
+    0% { box-shadow: inset 0 0 0px #ef4444; border-color: #1f2937; }
+    25% { box-shadow: inset 0 0 35px rgba(239, 68, 68, 0.5); border-color: #ef4444; }
+    100% { box-shadow: inset 0 0 0px #ef4444; border-color: #1f2937; }
+}
+
+.take-damage {
+    animation: damageFlash 0.6s ease-out;
+}
+
+/* 5. AVISO CRÍTICO DE REATOR SUPERAQUECIDO */
+.reactor-overload {
+    animation: criticalPulse 0.8s infinite alternate;
+    border: 1px solid #dc2626 !important;
+}
+
+@keyframes criticalPulse {
+    0% { background: #111827; box-shadow: inset 0 0 8px rgba(220, 38, 38, 0.2); }
+    100% { background: #221010; box-shadow: inset 0 0 25px rgba(220, 38, 38, 0.45); }
+}
